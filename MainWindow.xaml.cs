@@ -16,42 +16,40 @@ using Microsoft.Web.WebView2.Core;
 
 namespace hash_browser
 {
-  /// <summary>
-  /// Interaction logic for MainWindow.xaml
-  /// </summary>
-  public partial class MainWindow : Window
-  {
-    public MainWindow()
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
-      InitializeComponent();
-    }
+        public MainWindow()
+        {
+            InitializeComponent();
+            DataContext = new Model();
+        }
 
-    void ButtonGo_Click(object sender, RoutedEventArgs e)
-    {
-      if (webView != null && webView.CoreWebView2 != null)
-      {
-        webView.CoreWebView2.Navigate(addressBar.Text);
-      }
-    }
-    private void OnKeyDownHandler(object sender, KeyEventArgs e)
-    {
-      if (e.Key == Key.Return)
-      {
-        ButtonGo_Click(sender, e);
-      }
-    }
+        void ButtonGo_Click(object sender, RoutedEventArgs e)
+        {
+            if (webView != null && webView.CoreWebView2 != null)
+            {
+                webView.CoreWebView2.Navigate(addressBar.Text);
+            }
+        }
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                ButtonGo_Click(sender, e);
+            }
+        }
+        private void OnNavigationStartingHandler(object sender, CoreWebView2NavigationStartingEventArgs e)
+        {
+            addressBar.Text = new Uri(e.Uri).AbsoluteUri;
+        }
 
-
-    private void OnNavigationStartingHandler(object sender, CoreWebView2NavigationStartingEventArgs e)
-    {
-      // update the address bar
-      addressBar.Text = new Uri(e.Uri).AbsoluteUri;
+        private void OnNavigationCompletedHandler(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        {
+            //addressBar.Text = new Uri(e.Uri).AbsoluteUri;
+        }
     }
-
-    private void OnNavigationCompletedHandler(object sender, CoreWebView2NavigationCompletedEventArgs e)
-    {
-      // addressBar.Text = e.Uri.AbsoluteUri;
-    }
-  }
 
 }
