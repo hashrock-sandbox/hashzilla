@@ -40,6 +40,18 @@ namespace hash_browser
         ButtonGo_Click(sender, e);
       }
     }
+
+
+    private void OnNavigationStartingHandler(object sender, CoreWebView2NavigationStartingEventArgs e)
+    {
+      // update the address bar
+      addressBar.Text = new Uri(e.Uri).AbsoluteUri;
+    }
+
+    private void OnNavigationCompletedHandler(object sender, CoreWebView2NavigationCompletedEventArgs e)
+    {
+      // addressBar.Text = e.Uri.AbsoluteUri;
+    }
   }
 
 }
