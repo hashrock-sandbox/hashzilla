@@ -14,3 +14,8 @@ jobs:
       - 
         name: publish
         run: dotnet publish
+      - 
+        name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          path: bin/Debug/net6.0-windows/publish
