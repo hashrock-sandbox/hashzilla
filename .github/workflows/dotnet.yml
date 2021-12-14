@@ -1,0 +1,18 @@
+on: push
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x'        
+      - 
+        name: publish
+        run: dotnet publish
+        with: 
+          publish_dir: bin/Debug/net5.0-windows/publish
