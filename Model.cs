@@ -26,8 +26,8 @@ namespace hash_browser
 
             Items = new ReactiveCollection<string>()
             {
-                "https://twitter.com/",
-                "https://github.com/",
+                // "https://twitter.com/",
+                // "https://github.com/",
             };
 
         }

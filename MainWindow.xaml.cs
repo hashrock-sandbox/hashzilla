@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +22,27 @@ namespace hash_browser
     /// </summary>
     public partial class MainWindow : Window
     {
+        Model _vm;
+
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new Model();
+            _vm = new Model();
+            DataContext = _vm;
+            if(!File.Exists(@"bookmarks.txt")){
+                StreamWriter streamWriter = File.CreateText(@"bookmarks.txt");
+                streamWriter.WriteLine("https://duckduckgo.com/");
+                streamWriter.Close();
+            }
+
+            try{
+                var logFile = File.ReadAllLines(@"bookmarks.txt");
+                foreach (string url in logFile){
+                    _vm.Items.Add(url);
+                }
+            }catch(IOException e){
+                Console.Error.WriteLine(e.Message);
+            }
         }
 
         void ButtonGo_Click(object sender, RoutedEventArgs e)

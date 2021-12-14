@@ -10,7 +10,7 @@ jobs:
       - 
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0.x'        
+          dotnet-version: '5.0.x'        
       - 
         name: publish
         run: dotnet publish
@@ -18,4 +18,4 @@ jobs:
         name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
-          path: bin/Debug/net6.0-windows/publish
+          path: bin/Debug/net5.0-windows/publish
